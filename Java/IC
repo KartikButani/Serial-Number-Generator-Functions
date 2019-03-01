@@ -1,0 +1,52 @@
+/*
+
+Author : krButani
+Version : v1.0
+Git Profile: https://github.com/KartikButani
+
+*/
+public class IC {
+
+    public static String changeBase(String bc) {
+        String rbc = "";
+
+        String base = bc.substring(bc.length()-1);
+        String basefirst = bc.replace(base,"");
+
+        if(base.equalsIgnoreCase("Z")) {
+            rbc = changeBase(bc.substring(0,bc.length()-1)) + "A";
+        } else {
+            int c = (int) base.charAt(0);
+            c++;
+            rbc = basefirst+ ((char)c);
+        }
+
+        return rbc;
+    }
+
+    public static String getIncNo(String docno){
+
+        String rno = "";
+
+        if(docno.equalsIgnoreCase("")) {
+            rno ="A0001";
+        } else {
+            String base = docno.substring(docno.length() - 4);
+            String basefirst = docno.replace(base,"");
+            int number = Integer.parseInt(base);
+
+            if(number == 9999) {
+                number = 1;
+                basefirst = changeBase(basefirst);
+            } else {
+                number++;
+            }
+
+            String padded = String.format("%04d" , number);
+            rno = basefirst + padded;
+
+        }
+
+        return rno;
+    }
+}
